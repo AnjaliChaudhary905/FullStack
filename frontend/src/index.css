@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-allura: "Allura", cursive;
+  --font-proxima: "Proxima Nova", sans-serif;
+}
