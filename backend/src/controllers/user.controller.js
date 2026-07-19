@@ -32,7 +32,12 @@ export const signUpUser = async (req, res) => {
       { expiresIn: "2h" },
     );
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 2 * 60 * 60 * 1000,
+    });
 
     res.status(201).json({
       message: "user signed up",
@@ -82,8 +87,12 @@ export const loginUser = async (req, res) => {
       process.env.JWT_SECRET_KEY,
       { expiresIn: "2h" },
     );
-
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 2 * 60 * 60 * 1000, // 2 hours
+    });
 
     res.status(200).json({
       message: "user logged in",
@@ -106,7 +115,11 @@ export const loginUser = async (req, res) => {
 
 export const logoutUser = (req, res) => {
   try {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
     res.status(200).json({
       message: "user logged out",
       success: true,
@@ -127,7 +140,7 @@ export const getMe = (req, res) => {
       message: "user fetched",
       success: true,
       data: {
-        _id:user._id,
+        _id: user._id,
         fullname: user.fullname,
         email: user.email,
         role: user.role,
