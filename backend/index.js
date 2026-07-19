@@ -4,8 +4,8 @@ import app from "./src/app.js";
 import connectDB from "./src/db/index.js";
 connectDB()
 .then(()=>{
-   app.listen(9000,()=>{
-    console.log("server is running on port 9000");
+   app.listen(PORT,()=>{
+    console.log(`server is running on port ${PORT}`);
    }) 
 })
 .catch((err)=>{
